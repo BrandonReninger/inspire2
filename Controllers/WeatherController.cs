@@ -12,20 +12,20 @@ using Microsoft.Extensions.Logging;
 namespace Keepr.Controllers
 {
     [ApiController]
-    [Route("api/[controller]")]
-    public class KeepsController : ControllerBase
+    [Route("api/[https://www.weatherapi.com/docs/#]")]
+    public class WeatherController : ControllerBase
     {
-        private readonly KeepsService _ks;
-        public KeepsController(KeepsService ks)
+        private readonly WeatherService _ws;
+        public KeepsController(WeatherService ws)
         {
-            _ks = ks;
+            _ws = ws;
         }
         [HttpGet]
-        public ActionResult<IEnumerable<Keep>> Get()
+        public ActionResult<IEnumerable<Weather>> Get()
         {
             try
             {
-                return Ok(_ks.Get());
+                return Ok(_ws.Get());
             }
             catch (Exception e)
             {
@@ -35,13 +35,13 @@ namespace Keepr.Controllers
 
         [HttpPost]
         [Authorize]
-        public ActionResult<Keep> Post([FromBody] Keep newKeep)
+        public ActionResult<Weather> Post([FromBody] Keep newKeep)
         {
             try
             {
                 var userId = HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
-                newKeep.UserId = userId;
-                return Ok(_ks.Create(newKeep));
+                newWeather.UserId = userId;
+                return Ok(_ws.Create(newWeather));
             }
             catch (Exception e)
             {

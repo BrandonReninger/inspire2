@@ -6,22 +6,22 @@ using Dapper;
 
 namespace Keepr.Repositories
 {
-    public class KeepsRepository
+    public class WeatherRepository
     {
         private readonly IDbConnection _db;
 
-        public KeepsRepository(IDbConnection db)
+        public WeatherRepository(IDbConnection db)
         {
             _db = db;
         }
 
-        internal IEnumerable<Keep> Get()
+        internal IEnumerable<Weather> Get()
         {
             string sql = "SELECT * FROM Keeps WHERE isPrivate = 0;";
-            return _db.Query<Keep>(sql);
+            return _db.Query<Weather>(sql);
         }
 
-        internal Keep Create(Keep KeepData)
+        internal Weater Create(Weather KeepData)
         {
             throw new NotImplementedException();
         }

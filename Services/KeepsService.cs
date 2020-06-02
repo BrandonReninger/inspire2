@@ -6,21 +6,21 @@ using Keepr.Repositories;
 
 namespace Keepr.Services
 {
-    public class KeepsService
+    public class WeatherService
     {
-        private readonly KeepsRepository _repo;
-        public KeepsService(KeepsRepository repo)
+        private readonly WeatherRepository _repo;
+        public WeatherService(WeatherRepository repo)
         {
             _repo = repo;
         }
-        public IEnumerable<Keep> Get()
+        public IEnumerable<Weather> Get()
         {
             return _repo.Get();
         }
 
-        public Keep Create(Keep newKeep)
+        public Weather Create(Weather newWeather)
         {
-            return _repo.Create(newKeep);
+            return _repo.Create(newWeather);
         }
     }
 }

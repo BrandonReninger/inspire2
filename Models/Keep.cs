@@ -1,6 +1,6 @@
 namespace Keepr.Models
 {
-    public class Keep
+    public class Weather
     {
         public int Id { get; set; }
         public string UserId { get; set; }
@@ -13,8 +13,5 @@ namespace Keepr.Models
         public int Keeps { get; set; }
 
     }
-    public class VaultKeepViewModel : Keep
-    {
-        public int VaultKeepId { get; set; }
-    }
+
 }

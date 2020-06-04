@@ -3,8 +3,6 @@ using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
-using Keepr.Repositories;
-using Keepr.Services;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
@@ -17,7 +15,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using MySql.Data.MySqlClient;
 
-namespace Keepr
+namespace Inspire2
 {
     public class Startup
     {
@@ -61,7 +59,6 @@ namespace Keepr
             services.AddScoped<IDbConnection>(x => CreateDbConnection());
 
             //NOTE REGISTER SERVICES AND REPOSITORIES
-            services.AddTransient<KeepsService>();
         }
 
         private IDbConnection CreateDbConnection()

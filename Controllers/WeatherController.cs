@@ -1,53 +1,40 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using System.Security.Claims;
 using System.Threading.Tasks;
-using Keepr.Models;
-using Keepr.Services;
+// using Inspire2.Models;
+// using Inspire2.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
-namespace Keepr.Controllers
+namespace Inspire2.Controllers
 {
+    public class Weather
+    {
+        public decimal Temp { get; set; }
+        public string Icon { get; set; }
+        public decimal Wind { get; set; }
+        public int Humidity { get; set; }
+        public decimal FeelsLike { get; set; }
+        public decimal UV { get; set; }
+    }
+
+    [Route("api[controller]")]
     [ApiController]
-    [Route("api/[https://www.weatherapi.com/docs/#]")]
     public class WeatherController : ControllerBase
     {
-        private readonly WeatherService _ws;
-        public KeepsController(WeatherService ws)
-        {
-            _ws = ws;
-        }
         [HttpGet]
-        public ActionResult<IEnumerable<Weather>> Get()
+        public async Task<ActionResult<string>> Get()
         {
-            try
+            string url = "http://api.weatherapi.com/v1/current.json?key=81b8c7586a6c4d5ab5360439200206&q=83709";
+            using (HttpClient client = new HttpClient())
             {
-                return Ok(_ws.Get());
-            }
-            catch (Exception e)
-            {
-                return BadRequest(e.Message);
-            };
-        }
-
-        [HttpPost]
-        [Authorize]
-        public ActionResult<Weather> Post([FromBody] Keep newKeep)
-        {
-            try
-            {
-                var userId = HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
-                newWeather.UserId = userId;
-                return Ok(_ws.Create(newWeather));
-            }
-            catch (Exception e)
-            {
-                return BadRequest(e.Message);
+                return await client.GetStringAsync(url);
             }
         }
-
     }
+
 }

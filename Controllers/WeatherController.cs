@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Security.Claims;
 using System.Threading.Tasks;
 // using Inspire2.Models;
@@ -26,14 +27,17 @@ namespace Inspire2.Controllers
     [ApiController]
     public class WeatherController : ControllerBase
     {
-        [HttpGet]
-        public async Task<ActionResult<string>> Get()
+        static HttpClient client = new HttpClient();
+
+        static async Task<Weather> GetProductAsync(string path)
         {
-            string url = "http://api.weatherapi.com/v1/current.json?key=81b8c7586a6c4d5ab5360439200206&q=83709";
-            using (HttpClient client = new HttpClient())
+            Weather weather = null;
+            HttpResponseMessage response = await client.GetAsync(path);
+            if (response.IsSuccessStatusCode)
             {
-                return await client.GetStringAsync(url);
+                weather = await response.Content.ReadAsAsync<Weather>();
             }
+            return weather;
         }
     }
 

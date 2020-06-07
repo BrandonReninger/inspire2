@@ -32,7 +32,7 @@ namespace Inspire2.Controllers
         static async Task<Weather> GetProductAsync(string path)
         {
             Weather weather = null;
-            HttpResponseMessage response = await client.GetAsync(path);
+            HttpResponseMessage response = await client.GetAsync("http://api.weatherapi.com/v1/current.json?key=81b8c7586a6c4d5ab5360439200206&q=83709");
             if (response.IsSuccessStatusCode)
             {
                 weather = await response.Content.ReadAsAsync<Weather>();
